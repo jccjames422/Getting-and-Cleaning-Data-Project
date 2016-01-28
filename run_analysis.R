@@ -55,3 +55,5 @@ labeled_data <- labeled_data %>%
         select(-activityname) %>% 
         group_by(subjectid, activitylabel) %>%
         summarize_each(funs(mean))
+
+write.table(labeled_data, file = "result.txt", row.names = FALSE)
