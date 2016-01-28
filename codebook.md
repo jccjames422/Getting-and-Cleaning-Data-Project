@@ -1,54 +1,40 @@
-#Summary
-The results.txt file contains a summary of the means and standard deviations for each of the measurements, grouped by subject and then grouped by activity.
+Data transformation
+-------------------
 
-#Variables
-- subjectid
-- activityname
-- 1 tBodyAcc-mean()-X
-- 2 tBodyAcc-mean()-Y
-- 3 tBodyAcc-mean()-Z
-- 4 tBodyAcc-std()-X
-- 5 tBodyAcc-std()-Y
-- 6 tBodyAcc-std()-Z
-- 41 tGravityAcc-mean()-X
-- 42 tGravityAcc-mean()-Y
-- 43 tGravityAcc-mean()-Z
-- 44 tGravityAcc-std()-X
-- 45 tGravityAcc-std()-Y
-- 46 tGravityAcc-std()-Z
-- 81 tBodyAccJerk-mean()-X
-- 82 tBodyAccJerk-mean()-Y
-- 83 tBodyAccJerk-mean()-Z
-- 84 tBodyAccJerk-std()-X
-- 85 tBodyAccJerk-std()-Y
-- 86 tBodyAccJerk-std()-Z
-- 121 tBodyGyro-mean()-X
-- 122 tBodyGyro-mean()-Y
-- 123 tBodyGyro-mean()-Z
-- 124 tBodyGyro-std()-X
-- 125 tBodyGyro-std()-Y
-- 126 tBodyGyro-std()-Z
-- 161 tBodyGyroJerk-mean()-X
-- 162 tBodyGyroJerk-mean()-Y
-- 163 tBodyGyroJerk-mean()-Z
-- 164 tBodyGyroJerk-std()-X
-- 165 tBodyGyroJerk-std()-Y
-- 166 tBodyGyroJerk-std()-Z
-- 266 fBodyAcc-mean()-X
-- 267 fBodyAcc-mean()-Y
-- 268 fBodyAcc-mean()-Z
-- 269 fBodyAcc-std()-X
-- 270 fBodyAcc-std()-Y
-- 271 fBodyAcc-std()-Z
-- 345 fBodyAccJerk-mean()-X
-- 346 fBodyAccJerk-mean()-Y
-- 347 fBodyAccJerk-mean()-Z
-- 348 fBodyAccJerk-std()-X
-- 349 fBodyAccJerk-std()-Y
-- 350 fBodyAccJerk-std()-Z
-- 424 fBodyGyro-mean()-X
-- 425 fBodyGyro-mean()-Y
-- 426 fBodyGyro-mean()-Z
-- 427 fBodyGyro-std()-X
-- 428 fBodyGyro-std()-Y
-- 429 fBodyGyro-std()-Z
+The raw data sets are processed with run_analisys.R script to create a tidy data
+set.
+
+### Merge training and test sets
+
+Test and training data (X_train.txt, X_test.txt), subject ids (subject_train.txt,
+subject_test.txt) and activity ids (y_train.txt, y_test.txt) are merged to obtain
+a single data set. Variables are labelled with the names assigned by original
+collectors (features.txt).
+
+### Extract mean and standard deviation variables
+
+From the merged data set is extracted and intermediate data set with only the
+values of estimated mean (variables with labels that contain "mean") and standard
+deviation (variables with labels that contain "std").
+
+### Use descriptive activity names
+
+A new column is added to intermediate data set with the activity description.
+Activity id column is used to look up descriptions in activity_labels.txt.
+
+### Label variables appropriately
+
+Labels given from the original collectors were changed:
+* to obtain valid R names
+* to obtain more descriptive labels
+
+### Create a tidy data set
+
+From the intermediate data set is created a final tidy data set where numeric
+variables are averaged for each activity and each subject.
+
+The tidy data set contains 180 observations with 81 variables divided in:
+
+*  an activity label (__Activity__): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
+*  an identifier of the subject who carried out the experiment (__Subject__): 1:30
+*  a 79-feature vector with time and frequency domain signal variables (numeric)
