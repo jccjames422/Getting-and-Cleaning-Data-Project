@@ -38,7 +38,6 @@ You should create one R script called run_analysis.R that does the following.
 
 * __CodeBook.md__: information about raw and tidy data set and elaboration made to
   transform them
-* __LICENSE__: license terms for text and code
 * __README.md__: this file
 * __run_analysis.R__: R script to transform raw data set in a tidy one
 
