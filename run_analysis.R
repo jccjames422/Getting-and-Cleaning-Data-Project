@@ -31,7 +31,7 @@ names(complete_data) <- total_column_names          # Updates the names of the c
 # Extract only the meaurements on the mean and standard deviation for each measurement
 ################################################################################################
 
-columns_to_extract <- grep("(subjectid)|(activityname)|(.+-mean\\(\\)-.+)|(.+-std\\(\\)-.+)", total_column_names)
+columns_to_extract <- grep("(subjectid)|(activityname)|(.+mean.+)|(.+std.+)", total_column_names)
 selected_data <- complete_data[ ,columns_to_extract]
 
 # Change the data.frame(s) to tbl_df for use with dplyr package
