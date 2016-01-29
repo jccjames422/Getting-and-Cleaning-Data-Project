@@ -34,17 +34,15 @@ You should create one R script called run_analysis.R that does the following.
 
 ## What you find in this repository
 
-* __CodeBook.md__: information about raw and tidy data set and elaboration made to
-  transform them
+* __CodeBook.md__: information about raw and tidy data set, and steps taken to transform the data
 * __README.md__: this file
-* __run_analysis.R__: R script to transform raw data set in a tidy one
+* __run_analysis.R__: R script to transform the raw data set into the new tidy data set
 
 ## How to create the tidy data set
 
 1. clone this repository: `git clone git@github.com:jccjames422/Getting-and-Cleaning-Data-Project.git`
-2. download the [compressed raw data](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
-3. unzip raw data and copy the contents of the directory `UCI HAR Dataset` to the cloned repository data directory
-4. open a R console and set the working directory to the repository root (use setwd())
-5. source run_analisys.R script (it requires the dplyr package): `source('run_analysis.R')`
+2. Data files necessary for analysis have been included in the repo
+3. Open an R console and set the working directory to the repo root (use setwd())
+4. source run_analisys.R script (it requires the dplyr package): `source('run_analysis.R')`
 
-In the repository root directory you find the file `results.txt` with the tidy data set.
+In the repo's root directory you will find the file `results.txt` which contains the tidy data set.
