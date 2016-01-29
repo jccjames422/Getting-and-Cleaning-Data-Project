@@ -24,6 +24,7 @@ complete_data <- rbind(test_data, train_data)
 ################################################################################################
 
 column_names <- readLines("./data/features.txt")    # Grabs a character vector with the names of the columns
+column_names <- gsub("[-().]|[0-9]| ", "", column_names) 
 new_names <- c("subjectid", "activityname")
 total_column_names <- c(new_names, column_names)    # Adds the two additional column names to the front of the vector
 names(complete_data) <- total_column_names          # Updates the names of the columns in the complete_data set
@@ -31,7 +32,7 @@ names(complete_data) <- total_column_names          # Updates the names of the c
 # Extract only the meaurements on the mean and standard deviation for each measurement
 ################################################################################################
 
-columns_to_extract <- grep("(subjectid)|(activityname)|(.+mean.+)|(.+std.+)", total_column_names)
+columns_to_extract <- grep("(subjectid)|(activityname)|(mean)|(std)", total_column_names)
 selected_data <- complete_data[ ,columns_to_extract]
 
 # Change the data.frame(s) to tbl_df for use with dplyr package
@@ -46,14 +47,11 @@ activity_labels <- tbl_df(activity_labels)
 ################################################################################################
 
 activity_labels <- rename(activity_labels, activityname = V1, activitylabel = V2)
-labeled_data <- inner_join(activity_labels, selected_data)
-names <- names(labeled_data)
-names <- sub("-", "", names)
-names(labeled_data) <- names
 
-labeled_data <- labeled_data %>%
+tidy_data <- 
+        inner_join(activity_labels, selected_data) %>%
         select(-activityname) %>% 
         group_by(subjectid, activitylabel) %>%
         summarize_each(funs(mean))
 
-write.table(labeled_data, file = "result.txt", row.names = FALSE)
+write.table(tidy_data, file = "result.txt", row.names = FALSE)
